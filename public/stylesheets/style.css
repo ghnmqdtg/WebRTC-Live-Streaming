@@ -1,0 +1,25 @@
+.navbar .navbar-brand, .navbar .navbar-nav .nav-item .nav-link {
+  font-size: 20px;
+  font-weight: normal; }
+
+.card .card-title {
+  font-size: 24px; }
+
+.btn.btn-primary.btn-link {
+  font-size: 20px; }
+
+.title {
+  font-weight: normal;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif; }
+
+@media (min-width: 900px) {
+  .text-center h1 {
+    font-size: 6rem;
+    font-weight: normal; }
+  .text-center h3 {
+    font-size: 2.25rem;
+    font-weight: normal; } }
+
+/*# sourceMappingURL=style.css.map */
+
+/*# sourceMappingURL=style.css.map */

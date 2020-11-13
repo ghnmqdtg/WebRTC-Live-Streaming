@@ -1,0 +1,27 @@
+{
+  "name": "webrtc-live-streaming",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Live streaming and realtime chat app with rooms",
+  "scripts": {
+    "start": "node ./bin/www",
+    "devstart": "nodemon ./bin/www",
+    "serverstart": "SET DEBUG=webrtc-live-streaming:* & npm run devstart"
+  },
+  "author": "tweizh",
+  "license": "MIT",
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "ejs": "~2.6.1",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "moment": "^2.29.1",
+    "morgan": "~1.9.1",
+    "node-sass-middleware": "0.11.0",
+    "socket.io": "^3.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}

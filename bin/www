@@ -1,0 +1,170 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+const app = require('../app');
+const debug = require('debug')('webrtc-live-streaming:server');
+const http = require('http');
+const socketio = require('socket.io');
+const formatMessage = require('../utils/messages')
+const { userJoin, getCurrentUser, userLeave, getRoomUsers } = require('../utils/users')
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+
+var server = http.createServer(app);
+
+/**
+ * Create Socket.io.
+ */
+
+const io = socketio(server);
+
+/**
+ * Run when client connects
+ */
+const botName = 'Chat Bot';
+
+io.on('connection', socket => {
+  // Debugging: log on the server side
+  // console.log('New Websocket Connection...');
+
+  // Listen on username and room of new participants
+  socket.on('joinRoom', ({ username, room }) => {
+    const user = userJoin(socket.id, username, room);
+
+    socket.join(user.room);
+    
+    // Emit message to a single user(client) that connects
+    socket.emit(
+      'message', 
+      formatMessage(botName, 'Welcom to the new world')
+    );
+
+    // Broadcast to all users when a new user connects(except the new one)
+    // use .to(user.room) to omit message to a specific room
+    socket.broadcast.to(user.room).emit(
+      'message', 
+      formatMessage(botName, `${user.username} has join the room`)
+    );
+
+    // Send users and room info(same as a user leave the room)
+    io.to(user.room).emit('roomUsers', {
+      room: user.room,
+      users: getRoomUsers(user.room)
+    });
+  });
+  
+  // Send message to all users
+  // io.emit();
+
+  // Listen on chat chatMessage(from client)
+  socket.on('chatMessage', msg => {
+    // Debugging: log on the server side
+    // console.log(msg);
+    const user = getCurrentUser(socket.id);
+
+    // emit message to all the users
+    io.to(user.room).emit(
+      'message', 
+      formatMessage(user.username, msg));
+  });
+
+  // Runs when client disconnects
+  socket.on('disconnect', () => {
+    const user = userLeave(socket.id);
+
+    // Let everyone know a user has left
+    // `, the 'backtick' or 'backquote' which can used to interpolate any kind of expression in the template literals.
+    if(user) {
+      io.to(user.room).emit(
+        'message', 
+        formatMessage(botName, `${user.username} has left the room`)
+      );
+
+      // Send users and room info(same as a join the room)
+      io.to(user.room).emit('roomUsers', {
+        room: user.room,
+        users: getRoomUsers(user.room)
+      });
+    };
+  });
+});
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}
