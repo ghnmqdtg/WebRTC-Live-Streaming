@@ -40,9 +40,12 @@ io.on('connection', socket => {
   // console.log('New Websocket Connection...');
 
   // Listen on username and room of new participants
-  socket.on('joinRoom', ({ username, room }) => {
+  socket.on('joinRoom', ({ username, room }, userId) => {
     const user = userJoin(socket.id, username, room);
-
+    
+    // Debugging: log on the server side
+    // console.log(socket.id, username, room);
+    
     socket.join(user.room);
     
     // Emit message to a single user(client) that connects
@@ -57,6 +60,18 @@ io.on('connection', socket => {
       'message', 
       formatMessage(botName, `${user.username} has join the room`)
     );
+
+    // Experimental: Streaming, user join the room
+    socket.to(user.room).broadcast.emit(
+      'user-connected', userId
+    );
+
+    // Experimental: Streaming, user leave the room
+    socket.on('disconnect', () => {
+      socket.to(user.room).broadcast.emit(
+        'user-disconnected', userId
+      );
+    });
 
     // Send users and room info(same as a user leave the room)
     io.to(user.room).emit('roomUsers', {
@@ -81,7 +96,7 @@ io.on('connection', socket => {
   });
 
   // Runs when client disconnects
-  socket.on('disconnect', () => {
+  socket.on('disconnect', ( userId ) => {
     const user = userLeave(socket.id);
 
     // Let everyone know a user has left

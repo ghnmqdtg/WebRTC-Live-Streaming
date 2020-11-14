@@ -5,7 +5,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var sassMiddleware = require('node-sass-middleware');
-
+const { PeerServer } = require('peer');
+const peerServer = PeerServer({ port: 9000, path: '/peerServer' });
 
 var app = express();
 
