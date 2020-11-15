@@ -1,12 +1,14 @@
 /* IMPORT SOME USEFUL NODE LIBRARIES INTO THE PROJECT */ 
-const createError = require('http-errors');
-const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
-const sassMiddleware = require('node-sass-middleware');
+var createError = require('http-errors');
+var express = require('express');
+var path = require('path');
+var cookieParser = require('cookie-parser');
+var logger = require('morgan');
+var sassMiddleware = require('node-sass-middleware');
+const { PeerServer } = require('peer');
+const peerServer = PeerServer({ path: '/peerServer' });
 
-const app = express();
+var app = express();
 
 /* IMPORT MODULES FROM OUR ROUTES DIRECTORY */ 
 var indexRouter = require('./routes/index');
@@ -44,7 +46,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 // route-handling
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
 
 /* ADDS HANDLER METHODS FOR ERRORS AND HTTP 404 RESPONSES */
 // catch 404 and forward to error handler

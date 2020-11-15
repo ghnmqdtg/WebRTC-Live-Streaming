@@ -10,7 +10,6 @@ const http = require('http');
 const socketio = require('socket.io');
 const formatMessage = require('../utils/messages')
 const { userJoin, getCurrentUser, userLeave, getRoomUsers } = require('../utils/users')
-const expressPeerServer = require('peer').ExpressPeerServer;
 
 /**
  * Get port from environment and store in Express.
@@ -124,13 +123,6 @@ io.on('connection', socket => {
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
-
-/**
-* Creat peer server
-*/
-
-const peerserver = expressPeerServer(server);
-app.use('/api', peerserver);
 
 /**
  * Normalize a port into a number, string, or false.
