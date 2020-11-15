@@ -6,23 +6,43 @@
 
 const app = require('../app');
 const debug = require('debug')('webrtc-live-streaming:server');
-const http = require('http');
+const https = require('https');
 const socketio = require('socket.io');
+// file system for reading ssl keys
+const fs = require('fs');
+const options = {
+  key:fs.readFileSync('server-key.pem', 'utf8'),
+  cert: fs.readFileSync('server-cert.pem', 'utf8')
+};
 const formatMessage = require('../utils/messages')
 const { userJoin, getCurrentUser, userLeave, getRoomUsers } = require('../utils/users')
+const { PeerServer } = require('peer');
+
+/**
+* Creat peer server
+*/
+
+const peerServer = PeerServer({
+    port: 3001, 
+    path: '/peerjs',
+    ssl: {
+        key: options.key,
+        cert: options.cert
+    }
+});
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '443');
 app.set('port', port);
 
 /**
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+var server = https.createServer(options, app);
 
 /**
  * Create Socket.io.

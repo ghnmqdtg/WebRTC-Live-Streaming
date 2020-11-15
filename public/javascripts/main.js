@@ -26,8 +26,9 @@ const socket = io('/');
 // let server take care of generating it
 const myPeer = new Peer(undefined, {
     host: '/',
-    port: '9000',
-    path: 'peerServer'
+    port: '3001',
+    secure: true,
+    path: '/peerjs'
 });
 
 // Join chatroom
