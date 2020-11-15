@@ -5,6 +5,7 @@ const roomName = document.getElementById('room-name');
 const userList = document.getElementById('users');
 
 // Elements for streaming functions
+const localVideoGrid = document.getElementById('local-video-grid');
 const videoGrid = document.getElementById('video-grid');
 const myVideo = document.createElement('video');
 const peersList = {};
@@ -47,7 +48,7 @@ navigator.mediaDevices.getUserMedia({
     video: true,
     audio: true
 }).then(stream => {
-    addVideoStream(myVideo, stream)
+    addLocalVideoStream(myVideo, stream)
 
     // listen to someone tries to call us
     myPeer.on('call', call => {
@@ -171,7 +172,20 @@ function connectToNewUser(userId, stream) {
     peersList[userId] = call;
 };
 
-// Add streaming video on the page
+// Add local streaming video on the page
+function addLocalVideoStream(video, stream) {
+    // this will allow us to play the video
+    video.srcObject = stream;
+    // add an event listener to the video
+    // once the stream and video actually is loaded on the page, play the video 
+    video.addEventListener('loadedmetadata', () => {
+        video.play();
+    })
+    // append the video the the html element
+    localVideoGrid.append(video);
+};
+
+// Add other's streaming video on the page
 function addVideoStream(video, stream) {
     // this will allow us to play the video
     video.srcObject = stream;
