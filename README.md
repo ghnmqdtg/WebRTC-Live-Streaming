@@ -2,6 +2,44 @@
 ## Introduction
 Live streaming website with real-time chatting function.
 
+## How it works ?
+Users can choose a chatting room they want to join in the index page. For example, user A sets the name like Tony, and room name as ABC, if room ABC doesn't exist, the server will create it automatically. Here comes user B named Tina, set the room name as ABC, that
+
+## Environment
+Windows 10 64-bit 20H2
+
+## Dependencies
+* Clone the repository and open it.
+
+* Install all the packages that you need.
+
+    ```
+    $ npm install
+    ```
+
+* Install `nodemon`.
+    ```
+    $ npm install --save-dev nodemon
+    ```
+
+## SSL Certificate
+If you want to use this application via IP address or domain name instead of `localhost`, this step is necessary. Since most of browsers block media(such as webcam) accessing from unsecure connections, we have to deploy this application with `HTTPS`. Here are commands using `openssl` to generate a key and certificate.
+
+```bash
+# generate a key
+$ openssl genrsa -out server-key.pem
+
+# this step will probably ask you to input the information of the signature,
+# such as country, company name, etc
+$ openssl req -new -key server-key.pem -out csr.pem
+
+# generate a certificate
+$ openssl x509 -req -days 9999 -in csr.pem -signkey server-key.pem -out server-cert.pem
+
+# optional: we dont need this, but I think it's okay 
+$ rm csr.pem
+```
+
 ## Structure
 ### Directories
 I used `tree /f` command to print out directory paths and files and made it more concise. I filtered `material kit` out of the tree structure below because that's not the point for this repo. The basic structure is setup by running `express --view=ejs --css=sass `, if you're interested in it, the instruction is [here](https://hackmd.io/@tweizh0331/H1OEpCBDP).
@@ -25,7 +63,8 @@ WebRTC-Live-Streaming:.
 │  │   main.js
 │  │
 │  └─stylesheets
-│      style_new.css
+│      style.css
+|      style_chat.css
 |
 ├─routes
 │      index.js
@@ -86,22 +125,17 @@ WebRTC-Live-Streaming:.
 
         The most important part of the frontend page, it deals chatting messages, media settings, and peer to peer communication.
 
-## Sequence Diagram
-
-
 ## Usage
-1. Install all the packages that you need
-
-    ```
-    $ npm install
-    ```
-
-2. Run the server
+1. Run the server
 
     ```
     $ npm run serverstart
     ```
 
+2. Access the website
+    ```
+    https://Your_IP_Address
+    ```
 ## References
 1. [Realtime Chat With Users & Rooms - Socket.io, Node & Express](https://www.youtube.com/watch?v=jD7FnbI76Hg)
 2. [How To Create A Video Chat App With WebRTC](https://www.youtube.com/watch?v=DvlyzDZDEq4)
