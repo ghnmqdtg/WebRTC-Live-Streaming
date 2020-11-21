@@ -10,7 +10,9 @@ For example, user A sets the name like Tony, and room name as ABC. If room ABC d
 By using `socket.io` and `peerjs`, they can chat through real-time messages or streaming video.
 
 ## Environment
-Windows 10 64-bit 20H2.
+Windows 10 64-bit 20H2, nodejs v12.18.4
+Ubuntu 18.04, nodejs v12.19.1
+Ubuntu 18.04, Docker 19.03.6
 
 
 ## Structure
@@ -141,6 +143,67 @@ $ rm csr.pem
     ```
     https://Your_IP_Address
     ```
+
+## Docker
+1. Install docker if you don't have it.
+    ```bash
+    sudo apt update
+    sudo apt install docker.io
+
+    # Start docker service
+    systemctl enable docker
+    systemctl start docker
+    
+    # Verify: you should see no error messages
+    systemctl status docker
+    sudo docker run hello-word
+    ```
+2. Build docker image
+    ```bash
+    sudo docker build -t webrtc:latest . --no-cache --rm
+
+    # Verify: you should see a image named "webrtc"
+    sudo docker images
+    ```
+3. Run the image as a container
+    ```bash
+    # -it: Create an interactive bash
+    # -p: Publish a container’s port(s) to the host
+    # -d: Run container in background
+    sudo docker run -it -p 443:443 -p 3001:3001 -d --restart=always --name=webrtc_app webrtc:latest
+    
+    # Verify: you should see container statu "Up seconds"
+    sudo docker ps
+    ```
+4. Play around
+    - Container
+        ```bash
+        # Show all the containers
+        sudo docker ps
+
+        # Action to the container
+        sudo docker stop/start/restart webrtc_app
+
+        # Remove the container
+        sudo docker rm webrtc_app
+
+        # Display stdout of the container
+        sudo docker logs webrtc_app
+
+        # Login to bash of the container
+        sudo docker exec -it webrtc_app /bin/bash
+        ```
+    - Image
+        ```bash
+        # Show all the images
+        sudo docker images
+
+        # Delete the image
+        sudo docker rmi webrtc
+
+        # Clean unused images
+        sudo docker images prune
+        ```
 
 ## References
 1. [Realtime Chat With Users & Rooms - Socket.io, Node & Express](https://www.youtube.com/watch?v=jD7FnbI76Hg)
