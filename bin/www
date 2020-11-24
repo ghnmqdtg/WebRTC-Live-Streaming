@@ -13,8 +13,8 @@ const socketio = require('socket.io');
 // file system for reading ssl keys
 const fs = require('fs');
 const options = {
-  key:fs.readFileSync('server-key.pem', 'utf8'),
-  cert: fs.readFileSync('server-cert.pem', 'utf8')
+  key:fs.readFileSync('./ssl_keys/private.key', 'utf8'),
+  cert: fs.readFileSync('./ssl_keys/certificate.crt', 'utf8')
 };
 const formatMessage = require('../utils/messages')
 const { userJoin, getCurrentUser, userLeave, getRoomUsers } = require('../utils/users')
