@@ -170,7 +170,7 @@ $ rm csr.pem
     # -it: Create an interactive bash
     # -p: Publish a container’s port(s) to the host
     # -d: Run container in background
-    sudo docker run -it -p 443:443 -p 3001:3001 -d --restart=always --name=webrtc_app webrtc:latest
+    sudo docker run -it -p 443:443 -p 3001:3001 -p 80:80 -d --restart=always --name=webrtc_app webrtc:latest
     
     # Verify: you should see container statu "Up seconds"
     sudo docker ps
