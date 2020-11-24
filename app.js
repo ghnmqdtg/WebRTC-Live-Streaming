@@ -9,6 +9,7 @@ var sassMiddleware = require('node-sass-middleware');
 // const peerServer = PeerServer({ port: 9000, path: '/peerServer' });
 
 var app = express();
+var httpRedir = express();
 
 /* IMPORT MODULES FROM OUR ROUTES DIRECTORY */ 
 var indexRouter = require('./routes/index');
@@ -64,6 +65,13 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+// http redirection(to https)
+httpRedir.get("*", function (req, res, next) {
+    res.redirect("https://" + req.get('host') + req.originalUrl);
+});
 
 /* APP IS NOW CONFIGURED. ALLOWS IT TO BE IMPORTED BY /bin/www */
-module.exports = app;
+module.exports = {
+  https: app,
+  http: httpRedir
+};

@@ -36,6 +36,8 @@ const myPeer = new Peer(undefined, {
 // with peer, pass the generated id(userId) to the server
 myPeer.on('open', id => {
     socket.emit('joinRoom', { username, room }, id);
+    // Debugging: log on the client side
+    console.log('User connected: ' + id);
 });
 
 // Streaming settings

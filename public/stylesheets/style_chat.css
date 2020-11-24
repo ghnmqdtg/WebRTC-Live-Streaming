@@ -154,13 +154,18 @@ a {
   margin: 20px;
   border-radius: 16px;
   max-width: 20%;
-  max-height: 20%;  
+  max-height: 20%;
+  transition: all 1s;
+}
+
+#local-video-grid:hover {
+  transform: scale(1.1);
 }
 
 #video-grid {
   margin-top: 10px;
   margin-left: 10px;
-  height: 40%;
+  height: 100%;
   width: 70%;
 }
 
@@ -169,7 +174,7 @@ video {
   height: 100%;
   margin: 16px;
   border-radius: 16px;
-  /* object-fit: cover; */
+  object-fit: cover;
 }
 
 @media (max-width: 700px) {

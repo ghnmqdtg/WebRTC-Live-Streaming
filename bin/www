@@ -4,15 +4,17 @@
  * Module dependencies.
  */
 
-const app = require('../app');
+const app = require('../app.js').https;
+const httpRedir = require('../app.js').http;
 const debug = require('debug')('webrtc-live-streaming:server');
 const https = require('https');
+const http  = require('http');
 const socketio = require('socket.io');
 // file system for reading ssl keys
 const fs = require('fs');
 const options = {
-  key:fs.readFileSync('server-key.pem', 'utf8'),
-  cert: fs.readFileSync('server-cert.pem', 'utf8')
+  key:fs.readFileSync('./ssl_keys/private.key', 'utf8'),
+  cert: fs.readFileSync('./ssl_keys/certificate.crt', 'utf8')
 };
 const formatMessage = require('../utils/messages')
 const { userJoin, getCurrentUser, userLeave, getRoomUsers } = require('../utils/users')
@@ -36,13 +38,16 @@ const peerServer = PeerServer({
  */
 
 var port = normalizePort(process.env.PORT || '443');
+var http_port = normalizePort(process.env.PORT || '80');
 app.set('port', port);
+httpRedir.set('port', http_port);
 
 /**
  * Create HTTP server.
  */
 
 var server = https.createServer(options, app);
+var http_server = http.createServer(httpRedir);
 
 /**
  * Create Socket.io.
@@ -62,10 +67,9 @@ io.on('connection', socket => {
   // Listen on username and room of new participants
   socket.on('joinRoom', ({ username, room }, userId) => {
     const user = userJoin(socket.id, username, room);
-    
     // Debugging: log on the server side
-    // console.log(socket.id, username, room);
-    
+    console.log('Connected: ' + userId + ' | Room: ' + room + ' | User: ' + username);
+
     socket.join(user.room);
     
     // Emit message to a single user(client) that connects
@@ -91,6 +95,8 @@ io.on('connection', socket => {
       socket.to(user.room).broadcast.emit(
         'user-disconnected', userId
       );
+      // Debugging: log on the server side
+      console.log('Disconnected: ' + userId + ' | Room: ' + room + ' | User: ' + username);
     });
 
     // Send users and room info(same as a user leave the room)
@@ -143,6 +149,7 @@ io.on('connection', socket => {
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+http_server.listen(http_port);        // listen on port 80 to redirect to https
 
 /**
  * Normalize a port into a number, string, or false.
