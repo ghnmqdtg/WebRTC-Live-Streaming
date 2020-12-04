@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var url = ['/', '/', '#', '/about', '/login'];
-var navbar = ['WebRTC Live Steaming', '主頁', '最新消息', '關於我們'];
+var url = ['#', '/', '/login', 'https://github.com/ghnmqdtg/WebRTC-Live-Streaming'];
+var navbar = ['WebRTC Live Steaming', '首頁', '登入', 'GitHub'];
 var AddressBar = '<meta name="theme-color" content="#000" >'
 
 /* GET home page. */
@@ -17,8 +17,8 @@ router.get('/', function(req, res, next) {
 
 /* GET about page. */
 // it render "about.ejs" in /views (default path)
-router.get('/about', function(req, res, next) {
-  res.render('about', {
+router.get('/login', function(req, res, next) {
+  res.render('login', {
     title: 'WebRTC-Live-Steaming',
     AddressBar: AddressBar,
     navbar: navbar,

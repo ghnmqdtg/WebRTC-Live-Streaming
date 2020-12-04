@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh">
 
 <head>
@@ -9,11 +9,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <%- AddressBar %>
   <!--     Fonts and icons     -->
-  <link rel="icon" type="image/png" href="/images/favicon.png">
+  <link rel="icon" type="image/png" href="/images/favicon.ico">
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- Material Kit CSS -->
   <link href="/stylesheets/css/material-kit.css?v=2.0.7" rel="stylesheet" />
+  <!-- Custom CSS -->
   <link href="/stylesheets/style.css" rel="stylesheet" />
 </head>
 
@@ -21,7 +22,7 @@
   <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
     <div class="container">
       <div class="navbar-translate">
-        <a class="navbar-brand" href=<%= url[0]%>>
+        <a class="navbar-brand">
           <%= navbar[0]%></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="sr-only">Toggle navigation</span>
@@ -51,28 +52,56 @@
       </div>
     </div>
   </nav>
-  <div class="page-header header-filter" data-parallax="true" style="background-image: url('/images/city_01.jpg')">
-    <div class="container"><br><br>
-      <div class="row align-items-center">
-          <div class="card">
-            <div class="card-body">
-              <div class="row">
-                <div class="col"></div>
-                <div class="col-sm-3 align-self-center">
-                  
-                </div>
-                <div class="col"></div>
+  <div class="section section-signup page-header" style="background-image: url('/images/city_01.jpg');">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-md-6 mx-auto">
+          <div class="card card-login">
+            <form class="form" action="/chat">
+              <div class="card-header card-header-danger text-center">
+                <br><h4 class="card-title">Streaming</h4><br>
               </div>
               <br>
-              <div class="row">
-                <div class="col">
+              <div class="card-body">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="material-icons">face</i>
+                    </span>
+                  </div>
+                  <input type="text" class="form-control" name="username" id="username" placeholder="User Name" required>
+                </div>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="material-icons">sensor_door</i>
+                    </span>
+                  </div>
+                  <input type="text" class="form-control" name="room" id="room" placeholder="Room Name" required>
                 </div>
               </div>
-            </div>
+              <br>
+              <div class="footer text-center">
+                <button type="submit" class="btn btn-primary btn-link btn-wd btn-lg">Get Started</a>
+              </div>
+            </form>
           </div>
+        </div>
       </div>
     </div>
   </div>
+  <footer class="footer footer-default">
+    <div class="container">
+      <nav class="float-center">
+        <ul>
+          <li>
+            <a>Made with Material Kit by Team BJQ</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+  
   <!--   Core JS Files   -->
   <script src="/javascripts/core/jquery.min.js" type="text/javascript"></script>
   <script src="/javascripts/core/popper.min.js" type="text/javascript"></script>

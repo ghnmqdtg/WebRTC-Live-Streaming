@@ -9,7 +9,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <%- AddressBar %>
   <!--     Fonts and icons     -->
-  <link rel="icon" type="image/png" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" href="/images/Logo.png">
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- Material Kit CSS -->
@@ -18,11 +18,11 @@
   <link href="/stylesheets/style.css" rel="stylesheet" />
 </head>
 
-<body>
+<body class="landing-page sidebar-collapse">
   <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
     <div class="container">
       <div class="navbar-translate">
-        <a class="navbar-brand" href=<%= url[0]%>>
+        <a class="navbar-brand">
           <%= navbar[0]%></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="sr-only">Toggle navigation</span>
@@ -52,39 +52,143 @@
       </div>
     </div>
   </nav>
-  <div class="section section-signup page-header" style="background-image: url('/images/city_01.jpg');">
+  <div class="page-header header-filter" data-parallax="true" style="background-image: url('/images/city_01.jpg');">
     <div class="container">
       <div class="row">
-        <div class="col-lg-4 col-md-6 mx-auto">
-          <div class="card card-login">
-            <form class="form" action="/chat">
-              <div class="card-header card-header-danger text-center">
-                <br><h4 class="card-title">Streaming</h4><br>
-              </div>
-              <br>
-              <div class="card-body">
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <i class="material-icons">face</i>
-                    </span>
-                  </div>
-                  <input type="text" class="form-control" name="username" id="username" placeholder="User Name" required>
+        <div class="col-md-8 ml-auto mr-auto">
+          <div class="brand text-center">
+            <h1>線上會議平台</h1>
+            <h3 class="title text-center">找不到好用的會議平台？</h3>
+            <a href="/login" class="btn btn-danger btn-raised btn-lg">
+              現在就試試
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="main main-raised">
+    <div class="container">
+      <div class="section text-center">
+        <div class="row">
+          <div class="col-md-8 ml-auto mr-auto">
+            <h2 class="title">Let's talk product</h2>
+            <img src="/images/Capstone.png" alt="Thumbnail Image">
+            <h5 class="description">
+              It's our logo, a stone has a cap on its head, and give a thumbs-up says it's fun.
+              A capstone course serves as the culminating and usually integrative experience of an educational program.
+              But, as a junior majoring in electronic and computer engineering in NTUST, we don't learn how to build a website.
+              So, the capstone course of ours is actually not to integrate experiences but to learn extra knowledge and integrate them.
+            </h5>
+          </div>
+        </div>‵
+        <div class="features">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="info">
+                <div class="icon icon-info">
+                  <i class="material-icons">chat</i>
                 </div>
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <i class="material-icons">sensor_door</i>
-                    </span>
+                <h4 class="info-title">Free Chat</h4>
+                <p>
+                  We provide you and your partners a platform that can make a conference call, and it's FREE.
+                </p>
+              </div>
+            </div>  
+            <div class="col-md-4">
+              <div class="info">
+                <div class="icon icon-success">
+                  <i class="material-icons">security</i>
+                </div>
+                <h4 class="info-title">Security</h4>
+                <p>
+                  Based on Web Real-Time Communication(WebRTC),<br>
+                  Our service won't store any data or monitor your calling.
+                </p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="info">
+                <div class="icon icon-danger">
+                  <i class="material-icons">speed</i>
+                </div>
+                <h4 class="info-title">High Speed</h4>
+                <p>
+                  You can hold a meeting or join one easily.<br>
+                  Also, you don't need to sign up for any accounts.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="section text-center">
+        <h2 class="title">開發團隊</h2>
+        <div class="team">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="team-player">
+                <div class="card card-plain">
+                  <div class="col-md-6 ml-auto mr-auto">
+                    <img src="/images/faces/TONG.jpg" alt="Thumbnail Image" class="img-raised rounded-circle img-fluid">
                   </div>
-                  <input type="text" class="form-control" name="room" id="room" placeholder="Room Name" required>
+                  <h4 class="card-title">唐中倫
+                    <br>
+                    <small class="card-description text-muted">The Guy Who Decides What To Eat</small>
+                  </h4>
+                  <div class="card-body">
+                    <p class="card-description">我現在還沒有話要跟你說。</p>
+                  </div>
+                  <div class="card-footer justify-content-center">
+                    <a href="https://www.facebook.com/jonathan.super.5" class="btn btn-link btn-just-icon" target="_blank"><i class="fa fa-facebook-square"></i></a>
+                    <a href="https://www.instagram.com/jonathan_tang_183/" class="btn btn-link btn-just-icon" target="_blank"><i class="fa fa-instagram"></i></a>
+                    <a href="https://github.com/Dodoesdid" class="btn btn-link btn-just-icon" target="_blank"><i class="fa fa-github"></i></a>
+                  </div>
                 </div>
               </div>
-              <br>
-              <div class="footer text-center">
-                <button type="submit" class="btn btn-primary btn-link btn-wd btn-lg">Get Started</a>
+            </div>
+            <div class="col-md-4">
+              <div class="team-player">
+                <div class="card card-plain">
+                  <div class="col-md-6 ml-auto mr-auto">
+                    <img src="/images/faces/LQL.png" alt="Thumbnail Image" class="img-raised rounded-circle img-fluid">
+                  </div>
+                  <h4 class="card-title">林琨霖
+                    <br>
+                    <small class="card-description text-muted">Back-End Engineer</small>
+                  </h4>
+                  <div class="card-body">
+                    <p class="card-description">我現在也還沒有話要跟你說。</p>
+                  </div>
+                  <div class="card-footer justify-content-center">
+                    <a href="https://www.facebook.com/qqq89513" class="btn btn-link btn-just-icon" target="_blank"><i class="fa fa-facebook-square"></i></a>
+                    <a href="https://www.instagram.com/qqq89513/" class="btn btn-link btn-just-icon" target="_blank"><i class="fa fa-instagram"></i></a>
+                    <a href="https://github.com/qqq89513" class="btn btn-link btn-just-icon" target="_blank"><i class="fa fa-github"></i></a>
+                  </div>
+                </div>
               </div>
-            </form>
+            </div>
+            <div class="col-md-4">
+              <div class="team-player">
+                <div class="card card-plain">
+                  <div class="col-md-6 ml-auto mr-auto">
+                    <img src="/images/faces/TWZ.jpg" alt="Thumbnail Image" class="img-raised rounded-circle img-fluid">
+                  </div>
+                  <h4 class="card-title">張庭偉
+                    <br>
+                    <small class="card-description text-muted">Full-Stack Engineer</small>
+                  </h4>
+                  <div class="card-body">
+                    <p class="card-description">他們說的話都是我幫他們說的。</p>
+                  </div>
+                  <div class="card-footer justify-content-center">
+                    <a href="https://www.facebook.com/brian.zhang.0331/" class="btn btn-link btn-just-icon" target="_blank"><i class="fa fa-facebook-square"></i></a>
+                    <a href="https://www.instagram.com/tweizh0331/" class="btn btn-link btn-just-icon" target="_blank"><i class="fa fa-instagram"></i></a>
+                    <a href="https://github.com/ghnmqdtg" class="btn btn-link btn-just-icon" target="_blank"><i class="fa fa-github"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -101,7 +205,7 @@
       </nav>
     </div>
   </footer>
-  
+
   <!--   Core JS Files   -->
   <script src="/javascripts/core/jquery.min.js" type="text/javascript"></script>
   <script src="/javascripts/core/popper.min.js" type="text/javascript"></script>
