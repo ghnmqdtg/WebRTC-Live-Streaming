@@ -48,7 +48,8 @@ myVideo.muted = true;
 navigator.mediaDevices.getUserMedia({
     // options
     video: true,
-    audio: true
+    audio: true,
+    video: { width: { min: 1280 }, height: { min: 720 } }
 }).then(stream => {
     addLocalVideoStream(myVideo, stream)
 
