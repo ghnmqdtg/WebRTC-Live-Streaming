@@ -2,6 +2,14 @@
 ## Introduction
 Live streaming website with real-time chatting function.
 
+You can give it a try with this [link](https://capstoneisfun.tk/)!
+
+> The SSL certificate is free, so it has only three months of life.
+
+![](https://i.imgur.com/VxGOb7p.jpg)
+
+![](https://i.imgur.com/R8G7Xek.png)
+
 ## How it works ?
 In the home page, users can choose a chatting room they want to join.
 
